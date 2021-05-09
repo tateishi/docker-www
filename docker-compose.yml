@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  www:
+    build:
+      context: ./www
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - data:/usr/share/nginx/html
+
+volumes:
+  data:
+    driver_opts:
+      type: nfs
+      o: "addr=fs1,rw,nolock,soft"
+      device: ":/volume1/nfs/web"
